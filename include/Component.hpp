@@ -14,7 +14,7 @@ public:
   Component(Component const & other);
   Component& operator=(Component const & other);
 
-  IComponent * createComponent(const std::string &type, const std::string &value);
+  nts::IComponent * createComponent(const std::string &type, const std::string &value);
   virtual nts::Tristate Compute(size_t pin_num_this = 1);
   virtual void SetLink(size_t pin_num_this,
     nts::IComponent &component,

@@ -19,11 +19,12 @@ Component& Component::operator=(Component const & other)
   return *this;
 }
 
-IComponent *Component::createComponent(const std::string &type, const std::string &value)
+nts::IComponent *Component::createComponent(const std::string &type, const std::string &value)
 {
+  Component *FromDeBite = new Component();
   std::cout << type << std::endl;
   std::cout << value << std::endl;
-
+  return (FromDeBite);
 }
 
 nts::Tristate Component::Compute(size_t pin_num_this)
