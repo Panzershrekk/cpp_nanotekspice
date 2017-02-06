@@ -3,7 +3,8 @@ NAME=		Nanotekspice
 SRC=		main.cpp \
 	      src/Component.cpp \
 				src/Circuit.cpp \
-				src/Parser.cpp
+				src/Parser.cpp \
+				src/FileParse.cpp \
 
 CC=		g++
 

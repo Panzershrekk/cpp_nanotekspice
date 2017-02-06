@@ -1,7 +1,8 @@
 #include "Circuit.hpp"
 
-Circuit::Circuit()
+Circuit::Circuit(std::string filename)
 {
+  _filename = filename;
 }
 
 Circuit::~Circuit()
@@ -19,17 +20,7 @@ Circuit& Circuit::operator=(Circuit const & other)
   return *this;
 }
 
-void Circuit::addComponent(Component &compo)
-{
-  (void)compo;
-}
-
-void Circuit::removeComponent(Component &compo)
-{
-  (void)compo;
-}
-
-void Circuit::startSimulation()
+void Circuit::Nanotekspice()
 {
 
 }
