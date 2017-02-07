@@ -1,29 +1,17 @@
-#include "Input.hpp"
+#include "Output.hpp"
 
-Input::Input()
+Output::Output()
 {
   _state = nts::Tristate::UNDEFINED;
   _nbrPin = 1;
   _linked = NULL;
 }
 
-Input::Input(std::string basestate)
-{
-  if (basestate == "0")
-    _state = nts::Tristate::FALSE;
-  else if (basestate == "1")
-    _state = nts::Tristate::TRUE;
-  else
-    _state = nts::Tristate::UNDEFINED;
-  _nbrPin = 1;
-  _linked = NULL;
-}
-
-Input::~Input()
+Output::~Output()
 {
 }
 
-Input::Input(Input const & other) :  Component(other)
+Output::Output(Output const & other) : Component(other)
 {
   _state = other._state;
   _nbrPin = other._nbrPin;
@@ -31,7 +19,7 @@ Input::Input(Input const & other) :  Component(other)
   _linked = other._linked;
 }
 
-Input& Input::operator=(Input const & other)
+Output& Output::operator=(Output const & other)
 {
   _state = other._state;
   _nbrPin = other._nbrPin;
@@ -40,23 +28,28 @@ Input& Input::operator=(Input const & other)
   return *this;
 }
 
-nts::Tristate Input::Compute(size_t pin_num_this)
+nts::Tristate Output::Compute(size_t pin_num_this)
 {
   if(_nbrPin == pin_num_this)
   {
-    if (getState() == 1)
-      return (nts::Tristate::TRUE);
-    else if (getState() == 0)
-      return (nts::Tristate::FALSE);
+    if (_linked)
+    {
+      if (_linked->Compute() == nts::Tristate::TRUE)
+        _state = nts::Tristate::TRUE;
+      else if (_linked->Compute() == nts::Tristate::FALSE)
+        _state = nts::Tristate::FALSE;
+      else
+        _state = nts::Tristate::UNDEFINED;
+    }
     else
-      return (nts::Tristate::UNDEFINED);
+      std::cout << "Pin is not linked" << std::endl;
   }
   else
     std::cout << "Pin does not exist" << std::endl;
   return (nts::Tristate::UNDEFINED);
 }
 
-void Input::SetLink(size_t pin_num_this,
+void Output::SetLink(size_t pin_num_this,
                         nts::IComponent &component,
                         size_t pin_num_target)
 {
@@ -66,12 +59,12 @@ void Input::SetLink(size_t pin_num_this,
     _linked = &component;
   }
   else
-    std::cout << "Pin or component does not exist" << std::endl;
+    std::cout << "Pin does not exist" << std::endl;
 }
 
-void Input::Dump(void) const
+void Output::Dump(void) const
 {
-  std::cout << "This input is ";
+  std::cout << "This Output is ";
   if (getState() == nts::Tristate::FALSE)
     std::cout << "desactivated" << std::endl;
   else if (getState() == nts::Tristate::TRUE)
@@ -84,17 +77,7 @@ void Input::Dump(void) const
     std::cout << "Pin 1 is not linked" << '\n';
 }
 
-void Input::setState(int s)
-{
-  if (s == 0)
-    _state = nts::Tristate::FALSE;
-  else if (s == 1)
-    _state = nts::Tristate::TRUE;
-  else
-    _state = nts::Tristate::UNDEFINED;
-}
-
-nts::Tristate Input::getState() const
+nts::Tristate Output::getState() const
 {
   return(_state);
 }

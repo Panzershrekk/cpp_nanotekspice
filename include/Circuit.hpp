@@ -5,6 +5,7 @@
 #include    "FileParse.hpp"
 #include    "Parser.hpp"
 #include    "Input.hpp"
+#include    "Output.hpp"
 
 class Circuit
 {

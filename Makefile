@@ -5,7 +5,8 @@ SRC=		main.cpp \
 				src/Circuit.cpp \
 				src/Parser.cpp \
 				src/FileParse.cpp \
-				src/Input.cpp
+				src/Input.cpp \
+				src/Output.cpp
 
 CC=		g++
 

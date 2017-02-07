@@ -24,10 +24,22 @@ void Circuit::Nanotekspice()
 {
   FileParse *file = new FileParse();
   Input *input = new Input("0");
+  Output *output = new Output();
   file->parseFile(_filename);
 
   _Chipset = file->getMapChipset();
   (void)_Chipset;
   input->Dump();
-  input->Compute(2);
+  output->Dump();
+  std::cout << "----FOR THE LINKING----" << '\n';
+  input->SetLink(1, *output, 1);
+  output->SetLink(1, *input, 1);
+  input->Dump();
+  output->Dump();
+  std::cout << "----CHANGING STATE------" << '\n';
+  output->Compute();
+  output->Dump();
+  input->setState(1);
+  output->Compute();
+  output->Dump();
 }

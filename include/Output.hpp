@@ -1,10 +1,10 @@
-#ifndef _INPUT_HPP_
-#define _INPUT_HPP_
+#ifndef _OUTPUT_HPP_
+#define _OUTPUT_HPP_
 
 #include    <map>
 #include    "Component.hpp"
 
-class Input : public Component
+class Output : public Component
 {
 private:
   nts::Tristate _state;
@@ -12,13 +12,12 @@ private:
   std::map<size_t, size_t> _link;
   nts::IComponent *_linked;
 public:
-  Input();
-  Input(std::string);
-  ~Input();
-  Input(Input const & other);
-  Input& operator=(Input const & other);
+  Output();
+  ~Output();
+  Output(Output const & other);
+  Output& operator=(Output const & other);
 
-  nts::IComponent * createInput(const std::string &value);
+  nts::IComponent * createOutput(const std::string &value);
   virtual nts::Tristate Compute(size_t pin_num_this = 1);
   virtual void SetLink(size_t pin_num_this,
                        nts::IComponent &component,
