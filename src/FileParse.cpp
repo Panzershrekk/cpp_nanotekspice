@@ -37,7 +37,6 @@ void  FileParse::parseFile(std::string filename)
     }
   setBuffer(parser->getBuffer());
   parseForTree();
-  DumpChipsetMap();
 }
 
 void FileParse::parseForTree()
@@ -57,7 +56,6 @@ void FileParse::parseForTree()
   }
   _Chipset["chipset"] = "found";
   _Chipset["input"] = "a0";
-  _Chipset["input"] = "a1";
 }
 
 void FileParse::chipsetMap()
