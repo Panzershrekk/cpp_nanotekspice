@@ -2,9 +2,9 @@
 #define _OUTPUT_HPP_
 
 #include    <map>
-#include    "Component.hpp"
+#include    "IComponent.hpp"
 
-class Output : public Component
+class Output : public nts::IComponent
 {
 private:
   nts::Tristate _state;

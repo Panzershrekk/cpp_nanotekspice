@@ -23,7 +23,7 @@ Input::~Input()
 {
 }
 
-Input::Input(Input const & other) :  Component(other)
+Input::Input(Input const & other)
 {
   _state = other._state;
   _nbrPin = other._nbrPin;

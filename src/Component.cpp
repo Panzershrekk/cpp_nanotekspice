@@ -1,3 +1,4 @@
+#include "Input.hpp"
 #include "Component.hpp"
 
 Component::Component()
@@ -21,29 +22,24 @@ Component& Component::operator=(Component const & other)
 
 nts::IComponent *Component::createComponent(const std::string &type, const std::string &value)
 {
-  Component *FromDeBite = new Component();
+  nts::IComponent *Comp = new Input();
   std::cout << type << std::endl;
   std::cout << value << std::endl;
-  return (FromDeBite);
+  return (Comp);
 }
 
-nts::Tristate Component::Compute(size_t pin_num_this)
+/*nts::IComponent * create4081(const std::string &value) const
 {
-  nts::Tristate tete = nts::UNDEFINED;
-  (void)pin_num_this;
-  return (tete);
+  (void)value;
 }
 
-void Component::SetLink(size_t pin_num_this,
-                        nts::IComponent &component,
-                        size_t pin_num_target)
+nts::IComponent * createInput(const std::string &value) const
 {
-  (void)pin_num_this;
-  (void)component;
-  (void)pin_num_target;
+  (void)value
 }
 
-void Component::Dump(void) const
+nts::IComponent * createOutput(const std::string &value) const
 {
-  std::cout << "Huge crap/dump" <<std::endl;
+  (void)value
 }
+*/

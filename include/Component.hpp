@@ -6,7 +6,7 @@
 #include <string>
 #include "IComponent.hpp"
 
-class Component : public nts::IComponent
+class Component
 {
 public:
   Component();
@@ -15,11 +15,9 @@ public:
   Component& operator=(Component const & other);
 
   nts::IComponent * createComponent(const std::string &type, const std::string &value);
-  virtual nts::Tristate Compute(size_t pin_num_this = 1);
-  virtual void SetLink(size_t pin_num_this,
-    nts::IComponent &component,
-    size_t pin_num_target);
-  virtual void Dump(void) const;
+  nts::IComponent * create4081(const std::string &value) const;
+  nts::IComponent * createInput(const std::string &value) const;
+  nts::IComponent * createOutput(const std::string &value) const;
 };
 
 #endif

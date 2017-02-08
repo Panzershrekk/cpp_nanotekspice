@@ -6,6 +6,7 @@
 #include    "Parser.hpp"
 #include    "Input.hpp"
 #include    "Output.hpp"
+#include    "Component4081.hpp"
 
 class Circuit
 {

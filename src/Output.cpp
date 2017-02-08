@@ -11,7 +11,7 @@ Output::~Output()
 {
 }
 
-Output::Output(Output const & other) : Component(other)
+Output::Output(Output const & other)
 {
   _state = other._state;
   _nbrPin = other._nbrPin;

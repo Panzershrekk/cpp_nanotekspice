@@ -2,9 +2,9 @@
 #define _INPUT_HPP_
 
 #include    <map>
-#include    "Component.hpp"
+#include    "IComponent.hpp"
 
-class Input : public Component
+class Input : public nts::IComponent
 {
 private:
   nts::Tristate _state;
