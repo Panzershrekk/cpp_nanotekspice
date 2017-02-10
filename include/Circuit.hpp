@@ -12,7 +12,6 @@ class Circuit
 {
 private:
   std::string _filename;
-  std::map<std::string, std::string> _Chipset;
 public:
   Circuit(std::string);
   ~Circuit();

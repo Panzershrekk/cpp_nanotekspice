@@ -71,6 +71,7 @@ void Input::SetLink(size_t pin_num_this,
 
 void Input::Dump(void) const
 {
+  std::cout << getState() << '\n';
   std::cout << "This input is ";
   if (getState() == nts::Tristate::FALSE)
     std::cout << "desactivated" << std::endl;

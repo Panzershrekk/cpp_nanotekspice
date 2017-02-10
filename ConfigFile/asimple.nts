@@ -1,0 +1,6 @@
+.chipsets:
+input		abou
+output		sys
+
+.links:
+abou:1		sys:1

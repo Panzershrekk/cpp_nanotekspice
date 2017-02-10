@@ -22,7 +22,9 @@ Circuit& Circuit::operator=(Circuit const & other)
 
 void Circuit::Nanotekspice()
 {
-  FileParse *file = new FileParse();
+  FileParse *fileparser = new FileParse();
+  fileparser->parseFile(_filename);
+  /*FileParse *file = new FileParse();
   Input *input = new Input("1");
   Input *input2 = new Input("1");
   Output *output = new Output();
@@ -54,6 +56,5 @@ void Circuit::Nanotekspice()
   std::cout << "---------OUTPUT---------" << '\n';
   output->Dump();
   output->Compute(1);
-  output->Dump();
-  (void)C4081;
+  output->Dump();*/
 }
