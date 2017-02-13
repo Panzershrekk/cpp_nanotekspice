@@ -36,4 +36,5 @@ void  FileParse::parseFile(std::string filename)
   //parser->DumpParseMap();
   parser->CheckValidity();
   parser->parseTree(*parser->createTree());
+  parser->DumpComponent();
 }

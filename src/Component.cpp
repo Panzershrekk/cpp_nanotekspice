@@ -22,24 +22,29 @@ Component& Component::operator=(Component const & other)
 
 nts::IComponent *Component::createComponent(const std::string &type, const std::string &value)
 {
-  nts::IComponent *Comp = new Input();
-  std::cout << type << std::endl;
-  std::cout << value << std::endl;
+  nts::IComponent *Comp;
+  if (type == "input")
+    Comp = createInput(value);
+  if (type == "output")
+    Comp = createOutput(value);
+  if (type == "4081")
+    Comp = create4081(value);
   return (Comp);
 }
 
-/*nts::IComponent * create4081(const std::string &value) const
+nts::IComponent *Component::createInput(const std::string &value) const
 {
-  (void)value;
+  return (new Input(value));
 }
 
-nts::IComponent * createInput(const std::string &value) const
+nts::IComponent *Component::create4081(const std::string &value) const
 {
-  (void)value
+  (void) value;
+  return (new Component4081());
 }
 
-nts::IComponent * createOutput(const std::string &value) const
+nts::IComponent *Component::createOutput(const std::string &value) const
 {
-  (void)value
+  (void) value;
+  return (new Output());
 }
-*/

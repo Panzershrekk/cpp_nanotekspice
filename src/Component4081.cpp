@@ -97,7 +97,7 @@ void Component4081::SetLink(size_t pin_num_this,
     _linked[pin_num_this - 1] = &component;
   }
   else
-    std::cout << "Pin or component does not exist" << std::endl;
+    std::cout << "Pin or component does not exist!!!" << std::endl;
 }
 
 void Component4081::Dump(void) const

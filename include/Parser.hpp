@@ -16,6 +16,10 @@ private:
   std::string _buffer;
   std::vector<std::string> _parseMap;
   std::string _section;
+  std::string _line;
+  std::string _firstName;
+  size_t _firstPin;
+  std::map<std::string, nts::IComponent *> _allComp;
 public:
   Parser();
   ~Parser();
@@ -23,11 +27,13 @@ public:
   Parser& operator=(Parser const & other);
 
   nts::t_ast_node *addNode(std::string, nts::ASTNodeType, std::string);
-  //nts::t_ast node *createNodeLink(std::string);
-  //nts::t_ast_node *addNode2(std::string, nts::ASTNodeType, std::string);
+  nts::t_ast_node *createNodeLink(std::string, std::vector<struct nts::s_ast_node*>);
 
   void parseFile(std::string filename);
   void parseChildren(std::vector<nts::s_ast_node*>::iterator, std::string);
+
+  void DumpTree(nts::t_ast_node& root);
+  void DumpChildren(std::vector<nts::s_ast_node*>::iterator, std::string father);
 
   std::string  getBuffer() const;
   std::vector<std::string>getParseMap() const;
@@ -44,6 +50,7 @@ public:
   std::string findSecondLinkPin(std::string);
 
   void ComponentIsValid();
+  void DumpComponent();
 
   virtual void feed(std::string const& input);
   virtual void parseTree(nts::t_ast_node& root);

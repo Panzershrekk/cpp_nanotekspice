@@ -5,6 +5,9 @@
 #include <fstream>
 #include <string>
 #include "IComponent.hpp"
+#include "Input.hpp"
+#include "Component4081.hpp"
+#include "Output.hpp"
 
 class Component
 {
