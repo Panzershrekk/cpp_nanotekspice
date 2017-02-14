@@ -20,6 +20,10 @@ private:
   std::string _firstName;
   size_t _firstPin;
   std::map<std::string, nts::IComponent *> _allComp;
+  std::map<size_t, std::string> _valueCompo;
+  std::map<std::string, std::string> _inputComp;
+  int _firstPath;
+
 public:
   Parser();
   ~Parser();
@@ -51,6 +55,11 @@ public:
 
   void ComponentIsValid();
   void DumpComponent();
+
+  void setCompoValue(std::map<size_t, std::string>);
+  void ParseInputValue();
+  void DumpInputComp();
+  void setInputValue(std::string);
 
   virtual void feed(std::string const& input);
   virtual void parseTree(nts::t_ast_node& root);

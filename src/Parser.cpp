@@ -8,6 +8,7 @@ Parser::Parser()
   _section = "undefined";
   _line = "";
   _firstName = "";
+  _firstPath = 0;
 }
 
 Parser::~Parser()
@@ -49,14 +50,25 @@ void Parser::parseTree(nts::t_ast_node& root)
     for (std::vector<nts::s_ast_node*>::iterator it = root.children->begin(); it != root.children->end(); ++it)
       parseChildren(it, root.lexeme);
   }
+  _firstPath = 1;
 }
 
 void Parser::parseChildren(std::vector<nts::s_ast_node*>::iterator it, std::string father)
 {
   (void)father;
   Component *compo = new Component();
-  if ((int)(*it)->type == 2)
-    _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, /*(*it)->value*/"1");
+  if ((int)(*it)->type == 2 && _firstPath == 0)
+  {
+    if ((*it)->lexeme != "output")
+    {
+      if (_inputComp[(*it)->value] != "")
+        _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, _inputComp[(*it)->value]);
+      else
+        _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, "0");
+    }
+    else
+      _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, (*it)->value);
+  }
   else if((int)(*it)->type == 3)
   {
     _firstName = (*it)->lexeme;
@@ -64,15 +76,11 @@ void Parser::parseChildren(std::vector<nts::s_ast_node*>::iterator it, std::stri
   }
   else if((int)(*it)->type == 4)
   {
-    /*_allComp[_firstName]->SetLink(atoi((*it)->value.c_str()), *_allComp[(*it)->lexeme], _firstPin);
-    _allComp[(*it)->lexeme]->SetLink(_firstPin , *_allComp[_firstName], atoi((*it)->value.c_str()));*/
-
     _allComp[_firstName]->SetLink(_firstPin , *_allComp[(*it)->lexeme], atoi((*it)->value.c_str()));
     _allComp[(*it)->lexeme]->SetLink(atoi((*it)->value.c_str()) , *_allComp[_firstName], _firstPin);
 
-    _allComp[_firstName]->Compute(_firstPin);
-    std::cout << "ooooo" << '\n';
     _allComp[(*it)->lexeme]->Compute(atoi((*it)->value.c_str()));
+    _allComp[_firstName]->Compute(_firstPin);
   }
   if ((*it)->children != NULL)
   {
@@ -271,5 +279,40 @@ void Parser::DumpComponent()
     it != _allComp.end(); ++it)
     {
       it->second->Dump();
+    }
+}
+
+void Parser::setCompoValue(std::map<size_t, std::string> comp)
+{
+  _valueCompo = comp;
+}
+
+void Parser::setInputValue(std::string line)
+{
+  size_t pos = 0;
+
+  pos = line.find_first_of("=");
+  _inputComp[line.substr(0, pos)] = line.substr(pos + 1, line.size());
+}
+
+void Parser::ParseInputValue()
+{
+  for(std::map<size_t, std::string>::iterator it = _valueCompo.begin();
+    it != _valueCompo.end(); ++it)
+    {
+      size_t pos = 0;
+
+      pos = it->second.find_first_of("=");
+      _inputComp[it->second.substr(0, pos)] = it->second.substr(pos + 1, it->second.size());
+    }
+}
+
+void Parser::DumpInputComp()
+{
+  for (std::map<std::string, std::string>::iterator it = _inputComp.begin();
+    it != _inputComp.end(); ++it)
+    {
+      std::cout << it->first << '\n';
+      std::cout << it->second << '\n';
     }
 }

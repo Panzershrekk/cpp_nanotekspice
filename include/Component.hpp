@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <map>
+#include <functional>
 #include "IComponent.hpp"
 #include "Input.hpp"
 #include "Component4081.hpp"
@@ -11,6 +13,8 @@
 
 class Component
 {
+private:
+  std::map<std::string, std::function<nts::IComponent*(const std::string &value)>> _compFunc;
 public:
   Component();
   ~Component();

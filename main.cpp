@@ -10,7 +10,7 @@ int main(int ac, char **av)
 {
   if (ac >= 2)
   {
-    Circuit *Nanotekspice = new Circuit(av[1]);
+    Circuit *Nanotekspice = new Circuit(ac, av);
     Nanotekspice->Nanotekspice();
   }
   else

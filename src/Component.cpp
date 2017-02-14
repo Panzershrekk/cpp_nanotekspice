@@ -3,6 +3,10 @@
 
 Component::Component()
 {
+  _compFunc["input"] = std::bind(&Component::createInput, this, std::placeholders::_1);
+  _compFunc["output"] = std::bind(&Component::createOutput, this, std::placeholders::_1);
+  _compFunc["4081"] = std::bind(&Component::create4081, this, std::placeholders::_1);
+
 }
 
 Component::~Component()
@@ -22,14 +26,7 @@ Component& Component::operator=(Component const & other)
 
 nts::IComponent *Component::createComponent(const std::string &type, const std::string &value)
 {
-  nts::IComponent *Comp;
-  if (type == "input")
-    Comp = createInput(value);
-  if (type == "output")
-    Comp = createOutput(value);
-  if (type == "4081")
-    Comp = create4081(value);
-  return (Comp);
+  return (_compFunc[type](value));
 }
 
 nts::IComponent *Component::createInput(const std::string &value) const
@@ -45,6 +42,5 @@ nts::IComponent *Component::create4081(const std::string &value) const
 
 nts::IComponent *Component::createOutput(const std::string &value) const
 {
-  (void) value;
-  return (new Output());
+  return (new Output(value));
 }

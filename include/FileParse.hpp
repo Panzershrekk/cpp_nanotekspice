@@ -19,8 +19,9 @@ public:
   FileParse(FileParse const & other);
   FileParse& operator=(FileParse const & other);
 
-  void parseFile(std::string filename);
+  void parseFile(std::string filename, std::map<size_t, std::string>);
   void parseForTree();
+  int checkInput(std::string);
 };
 
 #endif

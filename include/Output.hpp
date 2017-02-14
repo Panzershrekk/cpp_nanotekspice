@@ -11,8 +11,10 @@ private:
   unsigned int  _nbrPin;
   std::map<size_t, size_t> _link;
   nts::IComponent *_linked;
+  std::string _value;
 public:
   Output();
+  Output(std::string);
   ~Output();
   Output(Output const & other);
   Output& operator=(Output const & other);

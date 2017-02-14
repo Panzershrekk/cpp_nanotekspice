@@ -1,8 +1,15 @@
 #include "Circuit.hpp"
 
-Circuit::Circuit(std::string filename)
+Circuit::Circuit(int ac, char **av)
 {
-  _filename = filename;
+  int i = 2;
+
+  _filename = av[1];
+  while (i < ac)
+  {
+    _valueCompo[i - 2] = av[i];
+    i++;
+  }
 }
 
 Circuit::~Circuit()
@@ -23,38 +30,14 @@ Circuit& Circuit::operator=(Circuit const & other)
 void Circuit::Nanotekspice()
 {
   FileParse *fileparser = new FileParse();
-  fileparser->parseFile(_filename);
-  /*FileParse *file = new FileParse();
-  Input *input = new Input("1");
-  Input *input2 = new Input("1");
-  Output *output = new Output();
-  Component4081 *C4081 = new Component4081();
-  file->parseFile(_filename);
+  fileparser->parseFile(_filename, _valueCompo);
+}
 
-  _Chipset = file->getMapChipset();
-  (void)_Chipset;
-  input->Dump();
-  output->Dump();
-  std::cout << "----COMPONENT 4081------" << '\n';
-  input->SetLink(1, *C4081, 1);
-  input2->SetLink(1, *C4081, 2);
-  output->SetLink(1, *C4081, 3);
-  C4081->SetLink(1, *input2, 1);
-  C4081->SetLink(2, *input, 1);
-  C4081->SetLink(3, *output, 1);
-
-
-  C4081->Compute(1);
-  C4081->Compute(2);
-  C4081->Compute(3);
-  C4081->Compute(6);
-  C4081->Dump();
-
-  std::cout << "----------INPUT---------" << '\n';
-  input->Dump();
-  input2->Dump();
-  std::cout << "---------OUTPUT---------" << '\n';
-  output->Dump();
-  output->Compute(1);
-  output->Dump();*/
+void Circuit::DumpValue()
+{
+  for(std::map<size_t, std::string>::iterator it = _valueCompo.begin();
+    it != _valueCompo.end(); ++it)
+    {
+        std::cout << it->second << std::endl;
+    }
 }

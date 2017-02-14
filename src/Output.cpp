@@ -7,6 +7,14 @@ Output::Output()
   _linked = NULL;
 }
 
+Output::Output(std::string value)
+{
+  _state = nts::Tristate::UNDEFINED;
+  _nbrPin = 1;
+  _linked = NULL;
+  _value = value;
+}
+
 Output::~Output()
 {
 }
@@ -40,6 +48,7 @@ nts::Tristate Output::Compute(size_t pin_num_this)
         _state = nts::Tristate::FALSE;
       else
         _state = nts::Tristate::UNDEFINED;
+      std::cout << _value << "=" << (int)_state << '\n';
     }
     else
       std::cout << "Pin is not linked" << std::endl;
