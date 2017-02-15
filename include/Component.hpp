@@ -9,6 +9,7 @@
 #include "IComponent.hpp"
 #include "Input.hpp"
 #include "Component4081.hpp"
+#include "Component4071.hpp"
 #include "Output.hpp"
 
 class Component
@@ -23,6 +24,7 @@ public:
 
   nts::IComponent * createComponent(const std::string &type, const std::string &value);
   nts::IComponent * create4081(const std::string &value) const;
+  nts::IComponent * create4071(const std::string &value) const;
   nts::IComponent * createInput(const std::string &value) const;
   nts::IComponent * createOutput(const std::string &value) const;
 };

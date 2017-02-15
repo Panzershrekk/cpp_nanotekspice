@@ -42,9 +42,9 @@ nts::Tristate Output::Compute(size_t pin_num_this)
   {
     if (_linked)
     {
-      if (_linked->Compute() == nts::Tristate::TRUE)
+      if (_linked->Compute(_link[pin_num_this]) == nts::Tristate::TRUE)
         _state = nts::Tristate::TRUE;
-      else if (_linked->Compute() == nts::Tristate::FALSE)
+      else if (_linked->Compute(_link[pin_num_this]) == nts::Tristate::FALSE)
         _state = nts::Tristate::FALSE;
       else
         _state = nts::Tristate::UNDEFINED;

@@ -7,7 +7,8 @@ SRC=		main.cpp \
 				src/FileParse.cpp \
 				src/Input.cpp \
 				src/Output.cpp \
-				src/Component4081.cpp
+				src/Component4081.cpp \
+				src/Component4071.cpp
 
 CC=		g++
 

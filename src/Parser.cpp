@@ -57,7 +57,7 @@ void Parser::parseChildren(std::vector<nts::s_ast_node*>::iterator it, std::stri
 {
   (void)father;
   Component *compo = new Component();
-  if ((int)(*it)->type == 2 && _firstPath == 0)
+  if ((int)(*it)->type == 2)
   {
     if ((*it)->lexeme != "output")
     {

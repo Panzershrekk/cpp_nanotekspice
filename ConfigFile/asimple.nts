@@ -1,6 +1,6 @@
 .chipsets:
-input		abou
-output		sys
+input		a
+output		b
 
 .links:
-abou:1		sys:1
+a:1		b:1
