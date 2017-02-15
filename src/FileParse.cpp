@@ -40,15 +40,13 @@ void  FileParse::parseFile(std::string filename, std::map<size_t, std::string> v
    }
    catch(std::exception const& e)
    {
-       std::cerr << "ERREUR : " << e.what() << std::endl;
+       std::cerr << "ERROR : " << e.what() << std::endl;
        return ;
    }
   parser->setCompoValue(valueCompo);
   parser->ParseInputValue();
-  //parser->DumpInputComp();
   root = parser->createTree();
   parser->parseTree(*root);
-  //parser->DumpTree(*root);
   std::cout << "> ";
   for (std::string line; std::getline(std::cin, line);)
   {

@@ -1,4 +1,4 @@
-NAME=		Nanotekspice
+NAME=		nanotekspice
 
 SRC=		main.cpp \
 	      src/Component.cpp \

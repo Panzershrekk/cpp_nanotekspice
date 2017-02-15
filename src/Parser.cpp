@@ -180,7 +180,6 @@ std::string Parser::findTypeInFile(std::string line)
   size_t pos = 0;;
   pos = line.find_first_of("\t");
   type = line.substr(0, pos);
-  //std::cout << type << '\n';
   return (type);
 }
 
@@ -190,7 +189,6 @@ std::string Parser::findNameInFile(std::string line)
   size_t pos = 0;
   pos = line.find_first_of("\t");
   name = line.substr(pos + 2, line.size());
-  //std::cout << name << '\n';
   return (name);
 }
 
@@ -208,8 +206,6 @@ std::string Parser::findFirstLinkPin(std::string line)
   size_t pos = line.find_first_of(":");
   size_t pos2 = line.find_first_of("\t");
   pos2 = pos2 - pos;
-  /*while (line[pos2] != '\t')
-    pos2++;*/
   name = line.substr(pos + 1, pos2);
   return (name);
 }
