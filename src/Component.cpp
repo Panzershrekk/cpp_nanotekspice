@@ -5,8 +5,11 @@ Component::Component()
 {
   _compFunc["input"] = std::bind(&Component::createInput, this, std::placeholders::_1);
   _compFunc["output"] = std::bind(&Component::createOutput, this, std::placeholders::_1);
+  _compFunc["true"] = std::bind(&Component::createTrue, this, std::placeholders::_1);
+  _compFunc["false"] = std::bind(&Component::createFalse, this, std::placeholders::_1);
   _compFunc["4081"] = std::bind(&Component::create4081, this, std::placeholders::_1);
   _compFunc["4071"] = std::bind(&Component::create4071, this, std::placeholders::_1);
+  _compFunc["4030"] = std::bind(&Component::create4030, this, std::placeholders::_1);
 
 }
 
@@ -42,11 +45,24 @@ nts::IComponent *Component::create4081(const std::string &value) const
 
 nts::IComponent *Component::create4071(const std::string &value) const
 {
-  (void) value;
   return (new Component4071(value));
 }
 
+nts::IComponent *Component::create4030(const std::string &value) const
+{
+  return (new Component4030(value));
+}
+
 nts::IComponent *Component::createOutput(const std::string &value) const
+{
+  return (new Output(value));
+}
+
+nts::IComponent *Component::createTrue(const std::string &value) const
+{
+  return (new Output(value));
+}
+nts::IComponent *Component::createFalse(const std::string &value) const
 {
   return (new Output(value));
 }

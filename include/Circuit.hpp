@@ -2,6 +2,7 @@
 #define _CIRCUIT_HPP_
 
 #include    <map>
+#include    "SpiceExecptions.hpp"
 #include    "Component.hpp"
 #include    "FileParse.hpp"
 #include    "Parser.hpp"

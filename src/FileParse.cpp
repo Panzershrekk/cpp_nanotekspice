@@ -34,7 +34,15 @@ void  FileParse::parseFile(std::string filename, std::map<size_t, std::string> v
         parser->feed(buffer);
       ifs.close();
     }
-  parser->CheckValidity();
+  try
+   {
+       parser->CheckValidity();
+   }
+   catch(std::exception const& e)
+   {
+       std::cerr << "ERREUR : " << e.what() << std::endl;
+       return ;
+   }
   parser->setCompoValue(valueCompo);
   parser->ParseInputValue();
   //parser->DumpInputComp();

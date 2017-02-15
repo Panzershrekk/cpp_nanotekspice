@@ -1,5 +1,6 @@
 #include "Parser.hpp"
 #include "Component.hpp"
+#include "SpiceExecptions.hpp"
 
 Parser::Parser()
 {
@@ -170,10 +171,7 @@ void Parser::CheckValidity()
         val--;
     }
   if (val != 0)
-  {
-    std::cout << "Error : This file is not valid" << '\n';
-    return ;
-  }
+    throw SpiceExecptions("The content of the file is invalid !");
 }
 
 std::string Parser::findTypeInFile(std::string line)

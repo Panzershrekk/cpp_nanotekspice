@@ -6,6 +6,7 @@
 #include <string>
 #include <algorithm>
 #include <map>
+//#include "SpiceExecptions.hpp"
 #include "IParser.hpp"
 #include "IComponent.hpp"
 
