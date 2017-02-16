@@ -10,6 +10,8 @@ SRC=		main.cpp \
 				src/Component4081.cpp \
 				src/Component4071.cpp \
 				src/Component4030.cpp \
+				src/Component4011.cpp \
+				src/Component4001.cpp \
 				src/False.cpp \
 				src/True.cpp \
 				src/SpiceExecptions.cpp

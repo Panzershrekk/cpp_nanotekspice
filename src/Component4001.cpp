@@ -1,6 +1,6 @@
-#include "Component4081.hpp"
+#include "Component4001.hpp"
 
-Component4081::Component4081(std::string value)
+Component4001::Component4001(std::string value)
 {
   _value = value;
   _nbrPin = 14;
@@ -15,11 +15,11 @@ Component4081::Component4081(std::string value)
   _OutLink[11] = std::make_pair(12,13);
 }
 
-Component4081::~Component4081()
+Component4001::~Component4001()
 {
 }
 
-Component4081::Component4081(Component4081 const & other)
+Component4001::Component4001(Component4001 const & other)
 {
   //_StateMap = other._StateMap;
   _nbrPin = other._nbrPin;
@@ -27,7 +27,7 @@ Component4081::Component4081(Component4081 const & other)
   //_linked = other._linked;
 }
 
-Component4081& Component4081::operator=(Component4081 const & other)
+Component4001& Component4001::operator=(Component4001 const & other)
 {
   _nbrPin = other._nbrPin;
   _link = other._link;
@@ -35,10 +35,8 @@ Component4081& Component4081::operator=(Component4081 const & other)
   return *this;
 }
 
-nts::Tristate Component4081::Compute(size_t pin_num_this)
+nts::Tristate Component4001::Compute(size_t pin_num_this)
 {
-  /*std::cout << this << '\n';
-  std::cout << _linked[pin_num_this -1] << '\n';*/
   if(pin_num_this >= 1 && pin_num_this <= _nbrPin /*&& _linked[pin_num_this] != NULL*/)
   {
     if (pin_num_this == 7 || pin_num_this == 14)
@@ -50,8 +48,8 @@ nts::Tristate Component4081::Compute(size_t pin_num_this)
     {
       if (_linked[_OutLink[pin_num_this].first -1] && _linked[_OutLink[pin_num_this].second -1])
       {
-        if ((_linked[_OutLink[pin_num_this].first -1])->Compute(_link[pin_num_this]) == nts::Tristate::TRUE
-            && _linked[_OutLink[pin_num_this].second -1]->Compute(_link[pin_num_this]) == nts::Tristate::TRUE)
+        if ((_linked[_OutLink[pin_num_this].first -1])->Compute(_link[pin_num_this]) == nts::Tristate::FALSE
+            && _linked[_OutLink[pin_num_this].second -1]->Compute(_link[pin_num_this]) == nts::Tristate::FALSE)
           return (_StateMap[pin_num_this - 1] = nts::Tristate::TRUE);
         else if ((_linked[_OutLink[pin_num_this].first -1])->Compute(_link[pin_num_this]) == nts::Tristate::UNDEFINED
             && _linked[_OutLink[pin_num_this].second -1]->Compute(_link[pin_num_this]) == nts::Tristate::UNDEFINED)
@@ -75,7 +73,7 @@ nts::Tristate Component4081::Compute(size_t pin_num_this)
   return (nts::Tristate::UNDEFINED);
 }
 
-void Component4081::SetLink(size_t pin_num_this,
+void Component4001::SetLink(size_t pin_num_this,
                         nts::IComponent &component,
                         size_t pin_num_target)
 {
@@ -93,7 +91,7 @@ void Component4081::SetLink(size_t pin_num_this,
     std::cout << "Pin or component does not exist!!!" << std::endl;
 }
 
-void Component4081::Dump(void) const
+void Component4001::Dump(void) const
 {
   std::map<size_t, nts::Tristate> StateMap;
   StateMap = getStateMap();
@@ -114,7 +112,7 @@ void Component4081::Dump(void) const
   }
 }
 
-std::map<size_t, nts::Tristate> Component4081::getStateMap() const
+std::map<size_t, nts::Tristate> Component4001::getStateMap() const
 {
   return (_StateMap);
 }

@@ -11,6 +11,8 @@
 #include "Component4081.hpp"
 #include "Component4071.hpp"
 #include "Component4030.hpp"
+#include "Component4011.hpp"
+#include "Component4001.hpp"
 #include "Output.hpp"
 
 class Component
@@ -27,6 +29,8 @@ public:
   nts::IComponent * create4081(const std::string &value) const;
   nts::IComponent * create4071(const std::string &value) const;
   nts::IComponent * create4030(const std::string &value) const;
+  nts::IComponent * create4011(const std::string &value) const;
+  nts::IComponent * create4001(const std::string &value) const;
   nts::IComponent * createInput(const std::string &value) const;
   nts::IComponent * createOutput(const std::string &value) const;
   nts::IComponent * createFalse(const std::string &value) const;

@@ -47,6 +47,7 @@ void  FileParse::parseFile(std::string filename, std::map<size_t, std::string> v
   parser->ParseInputValue();
   root = parser->createTree();
   parser->parseTree(*root);
+  //parser->DumpComponent();
   std::cout << "> ";
   for (std::string line; std::getline(std::cin, line);)
   {
