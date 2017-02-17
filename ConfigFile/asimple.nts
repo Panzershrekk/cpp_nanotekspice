@@ -2,11 +2,8 @@
 # Six inverter gate
 
 .chipsets:
-input		a
+false		a
 output		s
 
-4069		gate
-
 .links:
-a:1		gate:1
-gate:2		s:1
+a:1		s:1

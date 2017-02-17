@@ -83,10 +83,10 @@ nts::IComponent *Component::createOutput(const std::string &value) const
 
 nts::IComponent *Component::createTrue(const std::string &value) const
 {
-  return (new Output(value));
+  return (new True(value));
 }
 
 nts::IComponent *Component::createFalse(const std::string &value) const
 {
-  return (new Output(value));
+  return (new False(value));
 }

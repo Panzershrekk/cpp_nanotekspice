@@ -14,6 +14,8 @@
 #include "Component4030.hpp"
 #include "Component4011.hpp"
 #include "Component4001.hpp"
+#include "True.hpp"
+#include "False.hpp"
 #include "Clock.hpp"
 #include "Output.hpp"
 

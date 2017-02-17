@@ -60,7 +60,7 @@ void True::SetLink(size_t pin_num_this,
 
 void True::Dump(void) const
 {
-  std::cout << "This input is ";
+  std::cout << "This true is ";
   if (getState() == nts::Tristate::FALSE)
     std::cout << "desactivated" << std::endl;
   else if (getState() == nts::Tristate::TRUE)
