@@ -62,10 +62,28 @@ void Parser::parseChildren(std::vector<nts::s_ast_node*>::iterator it, std::stri
   {
     if ((*it)->lexeme != "output")
     {
-      if (_inputComp[(*it)->value] != "")
-        _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, _inputComp[(*it)->value]);
+      if ((*it)->lexeme == "clock")
+      {
+        if (_firstPath == 1)
+        {
+          nts::Tristate test = _allComp[(*it)->value]->Compute(1);
+          if (test == nts::Tristate::TRUE)
+            _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, "0");
+          else if (test == nts::Tristate::FALSE)
+            _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, "1");
+        }
+        else if (_inputComp[(*it)->value] != "")
+          _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, _inputComp[(*it)->value]);
+        else
+          _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, "0");
+      }
       else
+      {
+        if (_inputComp[(*it)->value] != "")
+          _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, _inputComp[(*it)->value]);
+        else
         _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, "0");
+      }
     }
     else
       _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, (*it)->value);

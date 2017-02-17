@@ -1,13 +1,13 @@
-#include "Input.hpp"
+#include "Clock.hpp"
 
-Input::Input()
+Clock::Clock()
 {
   _state = nts::Tristate::UNDEFINED;
   _nbrPin = 1;
   _linked = NULL;
 }
 
-Input::Input(std::string basestate)
+Clock::Clock(std::string basestate)
 {
   if (basestate == "0")
     _state = nts::Tristate::FALSE;
@@ -19,11 +19,11 @@ Input::Input(std::string basestate)
   _linked = NULL;
 }
 
-Input::~Input()
+Clock::~Clock()
 {
 }
 
-Input::Input(Input const & other)
+Clock::Clock(Clock const & other)
 {
   _state = other._state;
   _nbrPin = other._nbrPin;
@@ -31,7 +31,7 @@ Input::Input(Input const & other)
   _linked = other._linked;
 }
 
-Input& Input::operator=(Input const & other)
+Clock& Clock::operator=(Clock const & other)
 {
   _state = other._state;
   _nbrPin = other._nbrPin;
@@ -40,24 +40,16 @@ Input& Input::operator=(Input const & other)
   return *this;
 }
 
-nts::Tristate Input::Compute(size_t pin_num_this)
+nts::Tristate Clock::Compute(size_t pin_num_this)
 {
-  //std::cout << pin_num_this << '\n';
   if(_nbrPin == pin_num_this)
-  {
-    if (getState() == 1)
-      return (nts::Tristate::TRUE);
-    else if (getState() == 0)
-      return (nts::Tristate::FALSE);
-    else
-      return (nts::Tristate::UNDEFINED);
-  }
+    return(_state);
   else
     std::cout << "Pin does not exist" << std::endl;
   return (nts::Tristate::UNDEFINED);
 }
 
-void Input::SetLink(size_t pin_num_this,
+void Clock::SetLink(size_t pin_num_this,
                         nts::IComponent &component,
                         size_t pin_num_target)
 {
@@ -70,9 +62,9 @@ void Input::SetLink(size_t pin_num_this,
     std::cout << "Pin or component does not exist" << std::endl;
 }
 
-void Input::Dump(void) const
+void Clock::Dump(void) const
 {
-  std::cout << "This input is ";
+  std::cout << "This clock is ";
   if (getState() == nts::Tristate::FALSE)
     std::cout << "desactivated" << std::endl;
   else if (getState() == nts::Tristate::TRUE)
@@ -85,7 +77,7 @@ void Input::Dump(void) const
     std::cout << "Pin 1 is not linked" << '\n';
 }
 
-void Input::setState(int s)
+void Clock::setState(int s)
 {
   if (s == 0)
     _state = nts::Tristate::FALSE;
@@ -95,7 +87,7 @@ void Input::setState(int s)
     _state = nts::Tristate::UNDEFINED;
 }
 
-nts::Tristate Input::getState() const
+nts::Tristate Clock::getState() const
 {
   return(_state);
 }

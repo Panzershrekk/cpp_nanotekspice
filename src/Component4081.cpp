@@ -35,6 +35,7 @@ Component4081& Component4081::operator=(Component4081 const & other)
   return *this;
 }
 
+
 nts::Tristate Component4081::Compute(size_t pin_num_this)
 {
   /*std::cout << this << '\n';
@@ -50,11 +51,12 @@ nts::Tristate Component4081::Compute(size_t pin_num_this)
     {
       if (_linked[_OutLink[pin_num_this].first -1] && _linked[_OutLink[pin_num_this].second -1])
       {
-        if ((_linked[_OutLink[pin_num_this].first -1])->Compute(_link[pin_num_this]) == nts::Tristate::TRUE
-            && _linked[_OutLink[pin_num_this].second -1]->Compute(_link[pin_num_this]) == nts::Tristate::TRUE)
+        nts::Tristate fpin = _linked[_OutLink[pin_num_this].first -1]->Compute(_link[pin_num_this]);
+        nts::Tristate spin = _linked[_OutLink[pin_num_this].second -1]->Compute(_link[pin_num_this]);
+
+        if (fpin == nts::Tristate::TRUE && spin == nts::Tristate::TRUE)
           return (_StateMap[pin_num_this - 1] = nts::Tristate::TRUE);
-        else if ((_linked[_OutLink[pin_num_this].first -1])->Compute(_link[pin_num_this]) == nts::Tristate::UNDEFINED
-            && _linked[_OutLink[pin_num_this].second -1]->Compute(_link[pin_num_this]) == nts::Tristate::UNDEFINED)
+        else if (fpin == nts::Tristate::UNDEFINED && spin == nts::Tristate::UNDEFINED)
           return (_StateMap[pin_num_this] = nts::Tristate::UNDEFINED);
         else
         return (_StateMap[pin_num_this - 1] = nts::Tristate::FALSE);
@@ -64,9 +66,10 @@ nts::Tristate Component4081::Compute(size_t pin_num_this)
     }
     else if (_linked[pin_num_this -1])
     {
-      if (_linked[pin_num_this -1]->Compute(_link[pin_num_this]) == nts::Tristate::TRUE)
+      nts::Tristate fpin = _linked[pin_num_this -1]->Compute(_link[pin_num_this]);
+      if (fpin == nts::Tristate::TRUE)
         return (_StateMap[pin_num_this - 1] = nts::Tristate::TRUE);
-      else if (_linked[pin_num_this - 1]->Compute(_link[pin_num_this]) == nts::Tristate::FALSE)
+      else if (fpin == nts::Tristate::FALSE)
         return (_StateMap[pin_num_this - 1] = nts::Tristate::FALSE);
       else
         return (_StateMap[pin_num_this -1] = nts::Tristate::UNDEFINED);
