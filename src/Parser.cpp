@@ -39,7 +39,7 @@ void Parser::feed(std::string const& input)
     buffer = input.substr(0, pos);
   if (buffer.find_first_not_of("\n") != std::string::npos)
   {
-    _parseMap.push_back(buffer);
+    _parseMap.push_back(modifySpace(buffer));
     _buffer += buffer;
   }
 }
@@ -181,6 +181,7 @@ void Parser::DumpParseMap() const
 void Parser::CheckValidity()
 {
   int val = 2;
+  std::string section = "";
   for (std::vector<std::string>::const_iterator i = _parseMap.begin(); i != _parseMap.end(); ++i)
     {
       if (*i == ".chipsets:")
@@ -189,7 +190,17 @@ void Parser::CheckValidity()
         val--;
     }
   if (val != 0)
-    throw SpiceExecptions("The content of the file is invalid !");
+    throw SpiceExecptions("A Section is missing");
+  for (std::vector<std::string>::const_iterator i = _parseMap.begin(); i != _parseMap.end(); ++i)
+  {
+    if (section == "link")
+    {
+      if (!std::regex_match(*i, std::regex("[a-zA-Z0-9]+:[0-9]+[\t]+[a-zA-Z0-9]+:[0-9]+")))
+        throw SpiceExecptions("Link section is invalid");
+    }
+    if (*i == ".links:")
+      section = "link";
+  }
 }
 
 std::string Parser::findTypeInFile(std::string line)
@@ -206,7 +217,7 @@ std::string Parser::findNameInFile(std::string line)
   std::string name = "";
   size_t pos = 0;
   pos = line.find_first_of("\t");
-  name = line.substr(pos + 2, line.size());
+  name = line.substr(pos + 1/*2*/, line.size());
   return (name);
 }
 
@@ -327,4 +338,23 @@ void Parser::DumpInputComp()
       std::cout << it->first << '\n';
       std::cout << it->second << '\n';
     }
+}
+
+std::string  Parser::modifySpace(std::string s)
+{
+  bool space = false;
+ auto p = s.begin();
+ for (auto ch : s)
+   if (std::isspace(ch))
+   {
+     space = p != s.begin();
+   }
+   else
+   {
+     if (space) *p++ = '\t';
+     *p++ = ch;
+     space = false;
+   }
+ s.erase(p, s.end());
+ return (s);
 }

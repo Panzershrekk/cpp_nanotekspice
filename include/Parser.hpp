@@ -6,6 +6,7 @@
 #include <string>
 #include <algorithm>
 #include <map>
+#include <regex>
 //#include "SpiceExecptions.hpp"
 #include "IParser.hpp"
 #include "IComponent.hpp"
@@ -61,6 +62,7 @@ public:
   void ParseInputValue();
   void DumpInputComp();
   void setInputValue(std::string);
+  std::string modifySpace(std::string);
 
   virtual void feed(std::string const& input);
   virtual void parseTree(nts::t_ast_node& root);
