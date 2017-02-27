@@ -10,6 +10,17 @@ Parser::Parser()
   _line = "";
   _firstName = "";
   _firstPath = 0;
+  _compoType[0] = "input";
+  _compoType[1] = "output";
+  _compoType[2] = "4081";
+  _compoType[3] = "4071";
+  _compoType[4] = "4069";
+  _compoType[5] = "4030";
+  _compoType[6] = "4011";
+  _compoType[7] = "4001";
+  _compoType[8] = "clock";
+  _compoType[9] = "true";
+  _compoType[10] = "false";
 }
 
 Parser::~Parser()
@@ -98,6 +109,9 @@ void Parser::parseChildren(std::vector<nts::s_ast_node*>::iterator it, std::stri
     _allComp[_firstName]->SetLink(_firstPin , *_allComp[(*it)->lexeme], atoi((*it)->value.c_str()));
     _allComp[(*it)->lexeme]->SetLink(atoi((*it)->value.c_str()) , *_allComp[_firstName], _firstPin);
 
+    /*std::cout << _firstName << ":" << atoi((*it)->value.c_str()) << '\n';
+    std::cout << (*it)->lexeme << ":" << _firstPin << '\n';*/
+
     _allComp[(*it)->lexeme]->Compute(atoi((*it)->value.c_str()));
     _allComp[_firstName]->Compute(_firstPin);
   }
@@ -129,6 +143,8 @@ nts::t_ast_node *Parser::createTree()
     {
       if (*i != ".chipsets:")
       {
+        if(checkTypeValue(findTypeInFile(*i)) == 1)
+          throw SpiceExecptions("Component " + findTypeInFile(*i) + " does not exists");
         firstNode->children->push_back(addNode(findTypeInFile(*i), nts::ASTNodeType::COMPONENT,findNameInFile(*i)));
       }
     }
@@ -266,9 +282,19 @@ std::string Parser::findSecondLinkPin(std::string line)
   return (name);
 }
 
-void Parser::ComponentIsValid()
+int Parser::checkTypeValue(std::string str)
 {
-  /* tableau */
+  int i = 0;
+
+  for(std::map<size_t, std::string>::iterator it = _compoType.begin();
+    it != _compoType.end(); ++it)
+    {
+      if (it->second == str)
+        i++;
+    }
+  if (i == 0)
+    return (1);
+  return(0);
 }
 
 void Parser::DumpTree(nts::t_ast_node& root)
@@ -315,6 +341,8 @@ void Parser::setInputValue(std::string line)
   size_t pos = 0;
 
   pos = line.find_first_of("=");
+  if ((line.substr(pos + 1, line.size()) < "0") || (line.substr(pos + 1, line.size()) > "1"))
+    throw SpiceExecptions("The input value is not valid !");
   _inputComp[line.substr(0, pos)] = line.substr(pos + 1, line.size());
 }
 

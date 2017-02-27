@@ -24,6 +24,7 @@ private:
   std::map<std::string, nts::IComponent *> _allComp;
   std::map<size_t, std::string> _valueCompo;
   std::map<std::string, std::string> _inputComp;
+  std::map<size_t, std::string> _compoType;
   int _firstPath;
 
 public:
@@ -59,6 +60,7 @@ public:
   void DumpComponent();
 
   void setCompoValue(std::map<size_t, std::string>);
+  int checkTypeValue(std::string);
   void ParseInputValue();
   void DumpInputComp();
   void setInputValue(std::string);

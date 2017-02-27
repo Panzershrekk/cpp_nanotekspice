@@ -14,6 +14,7 @@ output		s
 .links:
 a:1		gate:1
 b:1		gate:2
+#gate:3  s:1
 gate:3		gate:13
 
 c:1		gate:5

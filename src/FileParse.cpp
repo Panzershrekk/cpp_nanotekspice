@@ -37,16 +37,16 @@ void  FileParse::parseFile(std::string filename, std::map<size_t, std::string> v
   try
    {
        parser->CheckValidity();
+       parser->setCompoValue(valueCompo);
+       parser->ParseInputValue();
+       root = parser->createTree();
+       parser->parseTree(*root);
    }
    catch(std::exception const& e)
    {
        std::cerr << "ERROR : " << e.what() << std::endl;
-       return ;
+       exit(1);
    }
-  parser->setCompoValue(valueCompo);
-  parser->ParseInputValue();
-  root = parser->createTree();
-  parser->parseTree(*root);
   std::cout << "> ";
   for (std::string line; std::getline(std::cin, line);)
   {
@@ -60,7 +60,14 @@ void  FileParse::parseFile(std::string filename, std::map<size_t, std::string> v
       parser->parseTree(*root);
     if (checkInput(line) == 1)
     {
-      parser->setInputValue(line);
+      try
+      {
+        parser->setInputValue(line);
+      }
+      catch(std::exception const& e)
+      {
+        std::cerr << "ERROR : " << e.what() << std::endl;
+      }
     }
     std::cout << "> ";
   }

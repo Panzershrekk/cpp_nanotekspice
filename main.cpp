@@ -14,6 +14,6 @@ int main(int ac, char **av)
     Nanotekspice->Nanotekspice();
   }
   else
-    std::cout << "Bad usage" << std::endl;
+    std::cerr << "Bad usage" << std::endl;
   return 0;
 }
