@@ -42,8 +42,6 @@ Input& Input::operator=(Input const & other)
 
 nts::Tristate Input::Compute(size_t pin_num_this)
 {
-  //std::cout << pin_num_this << '\n';
-  //pin_num_this = 1;
   if(_nbrPin == pin_num_this)
   {
     if (getState() == 1)
@@ -54,11 +52,7 @@ nts::Tristate Input::Compute(size_t pin_num_this)
       return (nts::Tristate::UNDEFINED);
   }
   else
-  {
-    //_linked->Compute(3);
-    //return ();
     std::cout << "Pin does not exist" << std::endl;
-  }
   return (nts::Tristate::UNDEFINED);
 }
 

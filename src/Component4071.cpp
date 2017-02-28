@@ -46,8 +46,9 @@ nts::Tristate Component4071::Compute(size_t pin_num_this)
     }
     if (pin_num_this == 3 || pin_num_this == 4 || pin_num_this == 10 || pin_num_this == 11)
     {
-      nts::Tristate fpin = _linked[_OutLink[pin_num_this].first -1]->Compute();
-      nts::Tristate spin = _linked[_OutLink[pin_num_this].second -1]->Compute();
+      nts::Tristate fpin = this->Compute(_OutLink[pin_num_this].first);
+      nts::Tristate spin = this->Compute(_OutLink[pin_num_this].second);
+
       if (_linked[_OutLink[pin_num_this].first -1] && _linked[_OutLink[pin_num_this].second -1])
       {
         if (fpin == nts::Tristate::FALSE && spin == nts::Tristate::FALSE)

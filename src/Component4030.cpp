@@ -48,13 +48,13 @@ nts::Tristate Component4030::Compute(size_t pin_num_this)
     {
       if (_linked[_OutLink[pin_num_this].first -1] && _linked[_OutLink[pin_num_this].second -1])
       {
-        if (((_linked[_OutLink[pin_num_this].first -1])->Compute(_link[pin_num_this]) == nts::Tristate::TRUE
-            && _linked[_OutLink[pin_num_this].second -1]->Compute(_link[pin_num_this]) == nts::Tristate::TRUE) ||
-            ((_linked[_OutLink[pin_num_this].first -1])->Compute(_link[pin_num_this]) == nts::Tristate::FALSE
-                && _linked[_OutLink[pin_num_this].second -1]->Compute(_link[pin_num_this]) == nts::Tristate::FALSE))
+        nts::Tristate fpin = this->Compute(_OutLink[pin_num_this].first);
+        nts::Tristate spin = this->Compute(_OutLink[pin_num_this].second);
+
+        if ((fpin== nts::Tristate::TRUE && spin == nts::Tristate::TRUE) ||
+            (fpin== nts::Tristate::FALSE && spin == nts::Tristate::FALSE))
           return (_StateMap[pin_num_this - 1] = nts::Tristate::FALSE);
-        else if ((_linked[_OutLink[pin_num_this].first -1])->Compute(_link[pin_num_this]) == nts::Tristate::UNDEFINED
-            && _linked[_OutLink[pin_num_this].second -1]->Compute(_link[pin_num_this]) == nts::Tristate::UNDEFINED)
+        else if (fpin == nts::Tristate::UNDEFINED && spin == nts::Tristate::UNDEFINED)
           return (_StateMap[pin_num_this] = nts::Tristate::UNDEFINED);
         else
         return (_StateMap[pin_num_this - 1] = nts::Tristate::TRUE);

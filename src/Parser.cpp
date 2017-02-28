@@ -109,11 +109,9 @@ void Parser::parseChildren(std::vector<nts::s_ast_node*>::iterator it, std::stri
     _allComp[_firstName]->SetLink(_firstPin , *_allComp[(*it)->lexeme], atoi((*it)->value.c_str()));
     _allComp[(*it)->lexeme]->SetLink(atoi((*it)->value.c_str()) , *_allComp[_firstName], _firstPin);
 
-    //std::cout << _firstPin << "," << (*it)->lexeme << "," << atoi((*it)->value.c_str()) <<'\n';
-
     _allComp[(*it)->lexeme]->Compute(atoi((*it)->value.c_str()));
-    //std::cout << atoi((*it)->value.c_str()) << "," << _firstName << "," <<_firstPin << '\n';
     _allComp[_firstName]->Compute(_firstPin);
+    //std::cout << atoi((*it)->value.c_str()) << "," << _firstName << "," <<_firstPin << '\n';
   }
   if ((*it)->children != NULL)
   {
