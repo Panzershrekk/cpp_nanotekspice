@@ -1,4 +1,5 @@
 #include "Component4081.hpp"
+#include "SpiceExecptions.hpp"
 
 Component4081::Component4081(std::string value)
 {
@@ -42,16 +43,15 @@ nts::Tristate Component4081::Compute(size_t pin_num_this)
   {
     if (pin_num_this == 7 || pin_num_this == 14)
     {
-        std::cout << "Couldn't compute this pin : Invalide Pin" << '\n';
-        return nts::Tristate::UNDEFINED;
+      throw SpiceExecptions("Link section is invalid");
+      return nts::Tristate::UNDEFINED;
     }
     if (pin_num_this == 3 || pin_num_this == 4 || pin_num_this == 10 || pin_num_this == 11)
     {
       if (_linked[_OutLink[pin_num_this].first -1] && _linked[_OutLink[pin_num_this].second -1])
       {
-        nts::Tristate fpin = _linked[_OutLink[pin_num_this].first -1]->Compute(/*_link[pin_num_this]*/);
-        nts::Tristate spin = _linked[_OutLink[pin_num_this].second -1]->Compute(/*_link[pin_num_this]*/);
-
+        nts::Tristate fpin = _linked[_OutLink[pin_num_this].first -1]->Compute(/*_OutLink[pin_num_this].first*/);
+        nts::Tristate spin = _linked[_OutLink[pin_num_this].second -1]->Compute(/*_OutLink[pin_num_this].second*//*_link[pin_num_this]*/);
         if (fpin == nts::Tristate::TRUE && spin == nts::Tristate::TRUE)
           return (_StateMap[pin_num_this - 1] = nts::Tristate::TRUE);
         else if (fpin == nts::Tristate::UNDEFINED && spin == nts::Tristate::UNDEFINED)

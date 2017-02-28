@@ -43,6 +43,7 @@ Input& Input::operator=(Input const & other)
 nts::Tristate Input::Compute(size_t pin_num_this)
 {
   //std::cout << pin_num_this << '\n';
+  //pin_num_this = 1;
   if(_nbrPin == pin_num_this)
   {
     if (getState() == 1)
