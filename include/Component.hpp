@@ -12,6 +12,7 @@
 #include "Component4071.hpp"
 #include "Component4069.hpp"
 #include "Component4030.hpp"
+#include "Component4017.hpp"
 #include "Component4011.hpp"
 #include "Component4001.hpp"
 #include "True.hpp"
@@ -34,6 +35,7 @@ public:
   nts::IComponent * create4071(const std::string &value) const;
   nts::IComponent * create4069(const std::string &value) const;
   nts::IComponent * create4030(const std::string &value) const;
+  nts::IComponent * create4017(const std::string &value) const;
   nts::IComponent * create4011(const std::string &value) const;
   nts::IComponent * create4001(const std::string &value) const;
   nts::IComponent * createInput(const std::string &value) const;

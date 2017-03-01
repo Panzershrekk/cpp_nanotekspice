@@ -1,8 +1,6 @@
 #include <string>
 #include <iostream>
-#include "IComponent.hpp"
-#include "Component.hpp"
-#include "Parser.hpp"
+
 #include "Circuit.hpp"
 #include "FileParse.hpp"
 

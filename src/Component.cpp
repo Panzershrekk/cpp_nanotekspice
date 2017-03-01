@@ -12,6 +12,7 @@ Component::Component()
   _compFunc["4071"] = std::bind(&Component::create4071, this, std::placeholders::_1);
   _compFunc["4069"] = std::bind(&Component::create4069, this, std::placeholders::_1);
   _compFunc["4030"] = std::bind(&Component::create4030, this, std::placeholders::_1);
+  _compFunc["4017"] = std::bind(&Component::create4017, this, std::placeholders::_1);
   _compFunc["4011"] = std::bind(&Component::create4011, this, std::placeholders::_1);
   _compFunc["4001"] = std::bind(&Component::create4001, this, std::placeholders::_1);
 }
@@ -64,6 +65,11 @@ nts::IComponent *Component::create4069(const std::string &value) const
 nts::IComponent *Component::create4030(const std::string &value) const
 {
   return (new Component4030(value));
+}
+
+nts::IComponent *Component::create4017(const std::string &value) const
+{
+  return (new Component4017(value));
 }
 
 nts::IComponent *Component::create4011(const std::string &value) const

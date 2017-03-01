@@ -21,6 +21,7 @@ Parser::Parser()
   _compoType[8] = "clock";
   _compoType[9] = "true";
   _compoType[10] = "false";
+  _compoType[10] = "4017";
 }
 
 Parser::~Parser()
@@ -209,7 +210,7 @@ void Parser::CheckValidity()
   {
     if (section == "link")
     {
-      if (!std::regex_match(*i, std::regex("[a-zA-Z0-9]+:[0-9]+[\t]+[a-zA-Z0-9]+:[0-9]+")))
+      if (!std::regex_match(*i, std::regex("[a-zA-Z0-9_]+:[0-9]+[\t]+[a-zA-Z0-9]+:[0-9]+")))
         throw SpiceExecptions("Link section is invalid");
     }
     if (*i == ".links:")

@@ -1,42 +1,31 @@
-NAME=		nanotekspice
+CXX		=	g++
 
-SRC=		main.cpp \
-	      src/Component.cpp \
-				src/Circuit.cpp \
-				src/Parser.cpp \
-				src/FileParse.cpp \
-				src/Input.cpp \
-				src/Output.cpp \
-				src/Component4081.cpp \
-				src/Component4071.cpp \
-				src/Component4069.cpp \
-				src/Component4030.cpp \
-				src/Component4011.cpp \
-				src/Component4001.cpp \
-				src/False.cpp \
-				src/True.cpp \
-				src/Clock.cpp \
-				src/SpiceExecptions.cpp
+NAME		=	nanotekspice
 
-CC=		g++
+RM		=	rm -f
 
-OBJ=		$(SRC:.cpp=.o)
+CXXFLAGS	+=	-std=c++11
+CXXFLAGS	+=	-Werror -Wall -Wextra
+CXXFLAGS	+=	-Iinclude/
 
-RM=		rm -f
+LDFLAGS		+=	-L./ -lnanotekspice
 
-CXXFLAGS=		-W -Wextra -Werror -Wall -Iinclude/
+SRCS		=	main.cpp
 
-COMPILE= $(CC) -o $(NAME) $(OBJ)
+OBJS		=	$(SRCS:.cpp=.o)
 
 all:		$(NAME)
 
-$(NAME):	$(OBJ)
-		$(COMPILE)
+$(NAME):	$(OBJS)
+		make -C src/
+		$(CXX) $(OBJS) $(CXXFLAGS) $(LDFLAGS) -o $(NAME)
 
 clean:
-		$(RM) $(OBJ)
+		make clean -C src/
+		$(RM) $(OBJS)
 
 fclean:		clean
+		make fclean -C src/
 		$(RM) $(NAME)
 
 re:		fclean all
