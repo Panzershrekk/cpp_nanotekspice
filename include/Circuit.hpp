@@ -23,6 +23,7 @@ public:
 
   void Nanotekspice();
   void DumpValue();
+  void ValidFile(std::string);
 };
 
 #endif

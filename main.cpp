@@ -12,6 +12,6 @@ int main(int ac, char **av)
     Nanotekspice->Nanotekspice();
   }
   else
-    std::cerr << "Bad usage" << std::endl;
+    std::cerr << "Usage: ./nanotekspice file.nts input1=x input2=y...." << std::endl;
   return 0;
 }

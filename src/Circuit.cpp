@@ -29,6 +29,15 @@ Circuit& Circuit::operator=(Circuit const & other)
 
 void Circuit::Nanotekspice()
 {
+  try
+   {
+     ValidFile(_filename);
+   }
+   catch(std::exception const& e)
+   {
+       std::cerr << "ERROR : " << e.what() << std::endl;
+       exit(1);
+   }
   FileParse *fileparser = new FileParse();
   fileparser->parseFile(_filename, _valueCompo);
 }
@@ -40,4 +49,17 @@ void Circuit::DumpValue()
     {
         std::cout << it->second << std::endl;
     }
+}
+
+void Circuit::ValidFile(std::string file)
+{
+  size_t pos = file.find_last_of('.');
+  std::string check = "";
+  while(file[pos])
+  {
+    check += file[pos];
+    pos++;
+  }
+  if (check != ".nts")
+    throw SpiceExecptions("Bad file format");
 }
