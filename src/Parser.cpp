@@ -150,6 +150,10 @@ nts::t_ast_node *Parser::createTree()
         if(checkTypeValue(findTypeInFile(*i)) == 1)
           throw SpiceExecptions("Component " + findTypeInFile(*i) + " does not exists");
         firstNode->children->push_back(addNode(findTypeInFile(*i), nts::ASTNodeType::COMPONENT,findNameInFile(*i)));
+        if (_component[findNameInFile(*i)] == "")
+          _component[findNameInFile(*i)] = findTypeInFile(*i);
+        else
+          throw SpiceExecptions("Component " + findTypeInFile(*i) + " already exists");
       }
     }
     else
