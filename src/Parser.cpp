@@ -64,6 +64,8 @@ void Parser::parseTree(nts::t_ast_node& root)
       parseChildren(it, root.lexeme);
   }
   _firstPath = 1;
+  if (AllLinked() != 0)
+    throw SpiceExecptions("An Output component is not linked");
 }
 
 void Parser::parseChildren(std::vector<nts::s_ast_node*>::iterator it, std::string father)
@@ -396,4 +398,17 @@ void Parser::displayAllOutput()
     {
       static_cast<Output *>(it->second)->displayState();
     }
+}
+
+int Parser::AllLinked()
+{
+  int i = 0;
+
+  for (std::map<std::string, nts::IComponent *>::const_iterator it = _output.begin();
+    it != _output.end(); ++it)
+    {
+      if ((static_cast<Output *>(it->second)->isLinked()) == 1)
+        i++;
+    }
+  return (i);
 }

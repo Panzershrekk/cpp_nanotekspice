@@ -95,3 +95,10 @@ void Output::displayState()
 {
   std::cout << _value << "=" << (int)_state << '\n';
 }
+
+int Output::isLinked()
+{
+  if (_linked == NULL)
+    return (1);
+  return (0);
+}

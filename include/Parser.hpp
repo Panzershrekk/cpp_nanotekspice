@@ -68,6 +68,7 @@ public:
   std::string modifySpace(std::string);
 
   void displayAllOutput();
+  int AllLinked();
 
   virtual void feed(std::string const& input);
   virtual void parseTree(nts::t_ast_node& root);

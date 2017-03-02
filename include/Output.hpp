@@ -28,6 +28,7 @@ public:
   void setState(int);
   nts::Tristate getState() const;
   void displayState();
+  int isLinked();
 };
 
 #endif
