@@ -27,6 +27,7 @@ public:
   virtual void Dump(void) const;
   void setState(int);
   nts::Tristate getState() const;
+  void displayState();
 };
 
 #endif

@@ -48,7 +48,7 @@ nts::Tristate Output::Compute(size_t pin_num_this)
         _state = nts::Tristate::FALSE;
       else
         _state = nts::Tristate::UNDEFINED;
-      std::cout << _value << "=" << (int)_state << '\n';
+      //std::cout << _value << "=" << (int)_state << '\n';
     }
     else
       std::cout << "Pin is not linked" << std::endl;
@@ -89,4 +89,9 @@ void Output::Dump(void) const
 nts::Tristate Output::getState() const
 {
   return(_state);
+}
+
+void Output::displayState()
+{
+  std::cout << _value << "=" << (int)_state << '\n';
 }

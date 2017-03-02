@@ -98,7 +98,10 @@ void Parser::parseChildren(std::vector<nts::s_ast_node*>::iterator it, std::stri
       }
     }
     else
+    {
       _allComp[(*it)->value] = compo->createComponent((*it)->lexeme, (*it)->value);
+      _output[(*it)->value] = _allComp[(*it)->value];
+    }
   }
   else if((int)(*it)->type == 3)
   {
@@ -384,4 +387,13 @@ std::string  Parser::modifySpace(std::string s)
    }
  s.erase(p, s.end());
  return (s);
+}
+
+void Parser::displayAllOutput()
+{
+  for (std::map<std::string, nts::IComponent *>::const_iterator it = _output.begin();
+    it != _output.end(); ++it)
+    {
+      static_cast<Output *>(it->second)->displayState();
+    }
 }

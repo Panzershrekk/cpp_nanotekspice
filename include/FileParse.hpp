@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <vector>
 #include <map>
+#include <utility>
+#include <csignal>
 
 class FileParse
 {
@@ -23,5 +25,7 @@ public:
   void parseForTree();
   int checkInput(std::string);
 };
+
+void my_handler(int n);
 
 #endif

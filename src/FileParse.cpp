@@ -28,6 +28,7 @@ void  FileParse::parseFile(std::string filename, std::map<size_t, std::string> v
   Parser *parser;
   parser = new Parser();
   nts::t_ast_node *root;
+  signal(SIGINT, my_handler);
   if (ifs)
     {
       while (std::getline(ifs, buffer))
@@ -41,6 +42,7 @@ void  FileParse::parseFile(std::string filename, std::map<size_t, std::string> v
        parser->ParseInputValue();
        root = parser->createTree();
        parser->parseTree(*root);
+       parser->displayAllOutput();
    }
    catch(std::exception const& e)
    {
@@ -51,7 +53,7 @@ void  FileParse::parseFile(std::string filename, std::map<size_t, std::string> v
   for (std::string line; std::getline(std::cin, line);)
   {
     if (line == "display")
-      std::cout << "alah" << '\n';
+      parser->displayAllOutput();
     if (line == "exit")
       exit(0);
     if (line == "dump")
@@ -81,4 +83,9 @@ int  FileParse::checkInput(std::string line)
   if ((int)pos == -1)
     return (0);
   return (1);
+}
+
+void my_handler(int param)
+{
+  (void)param;
 }

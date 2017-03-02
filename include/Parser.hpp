@@ -25,6 +25,7 @@ private:
   std::map<size_t, std::string> _valueCompo;
   std::map<std::string, std::string> _inputComp;
   std::map<size_t, std::string> _compoType;
+  std::map<std::string, nts::IComponent*> _output;
   int _firstPath;
 
 public:
@@ -65,6 +66,8 @@ public:
   void DumpInputComp();
   void setInputValue(std::string);
   std::string modifySpace(std::string);
+
+  void displayAllOutput();
 
   virtual void feed(std::string const& input);
   virtual void parseTree(nts::t_ast_node& root);
