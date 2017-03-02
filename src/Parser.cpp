@@ -346,11 +346,20 @@ void Parser::setCompoValue(std::map<size_t, std::string> comp)
 
 void Parser::setInputValue(std::string line)
 {
+  int i = 0;
   size_t pos = 0;
 
   pos = line.find_first_of("=");
   if ((line.substr(pos + 1, line.size()) < "0") || (line.substr(pos + 1, line.size()) > "1"))
     throw SpiceExecptions("The input value is not valid !");
+  for (std::map<std::string, std::string>::const_iterator it = _component.begin();
+      it != _component.end(); ++it)
+  {
+    if (it->first == line.substr(0, pos))
+      i++;
+  }
+  if (i == 0)
+    throw SpiceExecptions("This input doesn't exist");
   _inputComp[line.substr(0, pos)] = line.substr(pos + 1, line.size());
 }
 
