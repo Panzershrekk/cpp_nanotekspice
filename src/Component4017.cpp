@@ -1,4 +1,5 @@
 #include "Component4017.hpp"
+#include "SpiceExecptions.hpp"
 
 Component4017::Component4017(std::string value)
 {
@@ -67,7 +68,7 @@ void Component4017::SetLink(size_t pin_num_this,
     _linked[pin_num_this - 1] = &component;
   }
   else
-    std::cout << "Pin or component does not exist!!!" << std::endl;
+    throw SpiceExecptions("Pin or component does not exist!!!");
 }
 
 void Component4017::Dump(void) const

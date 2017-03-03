@@ -4,10 +4,16 @@
 .chipsets:
 input		a
 input		b
+input x
+input y
 output		s
+output    d
 4081		gate
 
 .links:
 a:1		gate:1
 b:1		gate:2
+x:1   gate:5
+y:1   gate:6
+d:1   gate:4
 s:1		gate:3

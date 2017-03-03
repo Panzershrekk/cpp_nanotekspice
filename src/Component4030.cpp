@@ -1,4 +1,5 @@
 #include "Component4030.hpp"
+#include "SpiceExecptions.hpp"
 
 Component4030::Component4030(std::string value)
 {
@@ -41,7 +42,7 @@ nts::Tristate Component4030::Compute(size_t pin_num_this)
   {
     if (pin_num_this == 7 || pin_num_this == 14)
     {
-        std::cout << "Couldn't compute this pin : Invalide Pin" << '\n';
+        throw SpiceExecptions("Couldn't link this pin : Invalide Pin");
         return nts::Tristate::UNDEFINED;
     }
     if (pin_num_this == 3 || pin_num_this == 4 || pin_num_this == 10 || pin_num_this == 11)
@@ -83,14 +84,14 @@ void Component4030::SetLink(size_t pin_num_this,
   {
     if (pin_num_this == 7 || pin_num_this == 14)
     {
-        std::cout << "Couldn't link this pin : Invalide Pin" << '\n';
-        return ;
+      throw SpiceExecptions("Couldn't link this pin : Invalide Pin");
+      return ;
     }
     _link[pin_num_this] = pin_num_target;
     _linked[pin_num_this - 1] = &component;
   }
   else
-    std::cout << "Pin or component does not exist!!!" << std::endl;
+    throw SpiceExecptions("Pin or component does not exist!!!");
 }
 
 void Component4030::Dump(void) const

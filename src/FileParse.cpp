@@ -69,6 +69,7 @@ void  FileParse::parseFile(std::string filename, std::map<size_t, std::string> v
       catch(std::exception const& e)
       {
         std::cerr << "ERROR : " << e.what() << std::endl;
+        exit (1);
       }
     }
     std::cout << "> ";
