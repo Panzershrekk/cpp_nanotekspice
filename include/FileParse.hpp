@@ -16,6 +16,7 @@ private:
   std::string _buffer;
   std::vector<std::string> _file;
 public:
+  static int _loop;
   FileParse();
   ~FileParse();
   FileParse(FileParse const & other);
@@ -26,6 +27,7 @@ public:
   int checkInput(std::string);
 };
 
-void my_handler(int n);
+void my_handler(int param);
+void signal_loop(int param);
 
 #endif

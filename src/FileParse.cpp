@@ -1,6 +1,8 @@
 #include "Parser.hpp"
 #include "FileParse.hpp"
 
+int FileParse::_loop = 0;
+
 FileParse::FileParse()
 {
   _buffer = "";
@@ -60,6 +62,16 @@ void  FileParse::parseFile(std::string filename, std::map<size_t, std::string> v
       parser->DumpComponent();
     if (line == "simulate")
       parser->parseTree(*root);
+    if (line == "loop")
+    {
+      FileParse::_loop = 1;
+      signal(SIGINT, signal_loop);
+      while (_loop != 0)
+      {
+        parser->parseTree(*root);
+      }
+      signal(SIGINT, my_handler);
+    }
     if (checkInput(line) == 1)
     {
       try
@@ -89,4 +101,10 @@ int  FileParse::checkInput(std::string line)
 void my_handler(int param)
 {
   (void)param;
+}
+
+void signal_loop(int param)
+{
+  (void)param;
+  FileParse::_loop = 0;
 }
