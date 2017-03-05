@@ -33,7 +33,7 @@ namespace nts
     virtual void feed(std::string const& input) = 0;
     virtual void parseTree(t_ast_node& root) = 0;
     virtual t_ast_node *createTree() = 0;
-    virtual ~IParser() /*A ajouter ?*/{ };
+    virtual ~IParser() { };
   };
 }
 

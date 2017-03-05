@@ -21,7 +21,7 @@ Parser::Parser()
   _compoType[8] = "clock";
   _compoType[9] = "true";
   _compoType[10] = "false";
-  _compoType[10] = "4017";
+  _compoType[11] = "4017";
 }
 
 Parser::~Parser()
